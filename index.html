@@ -25,7 +25,39 @@
     	<!-- jQueryMobile-->
     <link rel="stylesheet" href="script/jqMobile/jquery.mobile-1.4.2.min.css">
     <script src="script/jqMobile/jquery.mobile-1.4.2.min.js"></script>
-        
+    
+	<!-- <script>
+	
+	document.addEventListener(
+		"DOMContentLoaded",
+		function() {
+			$( "#gameCreateButton" ).bind( "click", function(event, ui) {
+				
+				
+				helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+				helper.setPassword(hex_md5("lo8604924%."));
+
+				var gameNameValue = $('#gameName').val();
+				var hostAliasValue = $('#hostAlias').val();
+				
+				if ( helper ) {
+					var dataObject = {
+						"gameName" : gameNameValue,
+						"hostAlias" : hostAliasValue
+					};
+
+					helper.insertDocument("games", dataObject, null);
+
+				}
+				
+				alert("Game created");
+			});
+			
+		},
+		true
+			
+	);
+	</script> -->
 
 
   </head>
@@ -47,12 +79,120 @@
 		<h1>Hide N Seek!</h1>
 	  	<div class="row">
 		  	<div class="col-md-4">
-		    	<a href="#page-x" onclick="getDistance()"><button type="submit"> Bench Press! </button></a>
-		    	<button type="submit" onclick="addPerson()"> Add bench!</button>
+				<!-- Button for game creation -->
+				<a href="#gameCreation"><button type="submit"> Create Game </button></a>
+				<a href="#joinGame"><button type="submit"> Join Game </button></a>
+		    	<!-- <a href="#page-x" onclick="getDistance()"><button type="submit"> Bench Press! </button></a>
+		    	<button type="submit" onclick="addPerson()"> Add bench!</button> -->
 		  	</div>
 	  	</div>
 	  	<div id="map-canvas"></div>
 	</div>
+	
+	<!-- Page for game creation -->
+	<div data-role="page" id="gameCreation">
+		<script> 
+			$.mobile.defaultPageTransition = "none";
+			$.mobile.defaultDialogTransition = "none";
+
+		</script>
+  		
+	  	<div data-role="header">		
+	  		<h1>Hide N Seek!</h1>
+			<a href="#home" data-icon="home" data-theme="a" class="ui-btn-right">Home</a>
+		</div><!-- header -->
+	  	
+		<div data-role="content">
+			<!-- Name of Game -->
+			<label for="basic">Game Name:</label>
+			<input type="text" name="name" id="gameName" value=""/>
+			<!-- Name of host -->
+			<!-- <label for="basic">Your Alias:</label>
+			<input type="text" name="name" id="hostAlias" value=""/> -->
+			<!-- Button for creating game -->
+			<a href="#waitingPage" onclick="createGame()"><button type="submit" id="gameCreateButton"> Create </button></a>
+		</div>
+  	
+  	</div><!-- Page gameCreation -->
+	
+	<!-- Page for starting game -->
+	<div data-role="page" id="slask">
+		<script> 
+			$.mobile.defaultPageTransition = "none";
+			$.mobile.defaultDialogTransition = "none";
+
+		</script>
+  		
+	  	<div data-role="header">		
+	  		<h1>Hide N Seek!</h1>
+			<a href="#home" data-icon="home" data-theme="a" class="ui-btn-right">Home</a>
+		</div><!-- header -->
+	  	
+		<div data-role="content">
+			<h2 id="joinGameTitle"><strong>Game:</strong> </h2>
+			<div id="joinGameText"></div>
+			<h2 id="joinAliasTitle"><strong>Alias:</strong> </h2>
+			<div id="joinAliasText"></div>
+			<!-- Button for starting countdown -->
+			<button type="submit" onclick="addPerson()"> Hide </button>
+			<button type="submit" onclick=""> Found </button>
+		</div>
+  	
+  	</div><!-- Page slask -->
+	
+	<!-- Page for joining game -->
+	<div data-role="page" id="joinGame">
+		<script> 
+			$.mobile.defaultPageTransition = "none";
+			$.mobile.defaultDialogTransition = "none";
+		</script>
+  		
+	  	<div data-role="header">		
+	  		<h1>Hide N Seek!</h1>
+			<a href="#home" data-icon="home" data-theme="a" class="ui-btn-right">Home</a>
+		</div><!-- header -->
+	  	
+		<div data-role="content">
+			<!-- Name of Game -->
+			<label for="basic">Game Name:</label>
+			<input type="text" name="name" id="joinGameName" value=""/>
+			<!-- Name of gamer -->
+			<label for="basic">Your Alias:</label>
+			<input type="text" name="name" id="joinAlias" value=""/>
+			<!-- Button for creating game -->
+			<a href="#slask" onclick="joinGame()"><button type="submit" id="gameCreateButton"> Join </button></a>
+		</div>
+  	
+  	</div> <!-- Page joinGamePage -->
+	
+	
+	
+	
+	<!-- Page for waiting on other players -->
+	<div data-role="page" id="waitingPage">
+		<script> 
+			$.mobile.defaultPageTransition = "none";
+			$.mobile.defaultDialogTransition = "none";
+		</script>
+  		
+	  	<div data-role="header">		
+	  		<h1>Hide N Seek!</h1>
+			<a href="#home" data-icon="home" data-theme="a" class="ui-btn-right">Home</a>
+		</div><!-- header -->
+	  	
+		<div data-role="content">
+			<h2 id="gameTitle"><strong>Game:</strong> </h2>
+			<div id="gameText"></div>
+			<!-- <div id="hostTitle"><strong>Host:</strong> </div> -->
+			<!-- <div id="hostText"></div> -->
+			<div id="playerList"/>
+			<a href="#page-x" onclick="getDistance()"><button type="submit"> Seek </button></a>
+			
+		</div>
+  	
+  	</div> <!-- Page waitingPage -->
+	
+	
 	
 		<!-- MALL FÖR KOMPASS -->
   	<div data-role="page" id="page-x">
