@@ -1,6 +1,73 @@
 window.peopleList=[];
 window.personNum=0;
 
+// Ny kod
+
+function createGame(){
+	// var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+	// helper.setPassword(hex_md5("lo8604924%."));
+
+	var gameNameValue = $('#gameName').val();
+	var hostAliasValue = $('#hostAlias').val();
+	
+	// if ( helper ) {
+		// var dataObject = {
+			// "gameName" : gameNameValue,
+			// "hostAlias" : hostAliasValue
+		// };
+
+		// helper.insertDocument("games", dataObject, null);
+
+	// }
+	
+	document.getElementById('gameText').innerHTML+=gameNameValue;
+	// document.getElementById('hostText').innerHTML+=hostAliasValue;
+};
+
+
+function joinGame(){
+	var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+	helper.setPassword(hex_md5("lo8604924%."));
+	
+	var gameNameValue = $('#joinGameName').val();
+	var aliasValue = $('#joinAlias').val();
+	
+	// if ( helper ) {
+		// var dataObject = {
+			// "gameName" : gameNameValue,
+			// "alias" : aliasValue
+		// };
+
+		// helper.insertDocument("games", dataObject, null);
+
+	// }
+	
+	document.getElementById('joinGameText').innerHTML=gameNameValue;
+	document.getElementById('joinAliasText').innerHTML=aliasValue;
+	
+};
+
+function updatePlayerList(){
+	var test = document.getElementById('gameText').innerHTML;
+	alert(test);
+	var searchCondition1 = { "game" : test };
+	
+	helper.searchDocuments(searchCondition1,"games", 
+		function(resp) {
+			var players='<br/>';
+			for (index in resp.outputData){
+				var rest1 = resp.outputData[index];
+				players = players+ rest1.alias+'<br/><br/>';
+			
+				
+			}
+			document.getElementById('playerList').innerHTML=players;
+			
+		}
+	);
+};			
+// Slut Ny Kod
+
 
 function initialize() {
 	var mapOptions = {
@@ -29,12 +96,15 @@ function addPerson(){
   
   	function showPosition(position){
  	
-  		var helper = new CBHelper("benchpress", "37ff338f77e39490bad736e64bdd5839", new GenericHelper());
-		helper.setPassword(hex_md5("mopub_14"));
+  		var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+		helper.setPassword(hex_md5("lo8604924%."));
 		
-
+		var gameNameValue = $('#joinGameName').val();
+		var aliasValue = $('#joinAlias').val();
 		
 		var dataObject = {
+			"game_name" : gameNameValue,
+			"alias" : aliasValue,
 			"lat_coords" : position.coords.latitude,
 			"lng_coords" : position.coords.longitude
 		};
@@ -105,8 +175,8 @@ function resize(dist) {
 }
 
 function getDistance(){
-	var helper = new CBHelper("benchpress", "37ff338f77e39490bad736e64bdd5839", new GenericHelper());
-	helper.setPassword(hex_md5("mopub_14"));
+	var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+	helper.setPassword(hex_md5("lo8604924%."));
 	
 	if (navigator.geolocation){
 
@@ -142,8 +212,12 @@ function getDistance(){
 		  return d; // returns the distance in meter
 		};
 		
+		var gameName2 = $('#gameText').val();
+		var searchCondition = { "game" : gameName};
+		alert(gameName2);
+		
 		helper.searchDocuments(
-			null, "people", function(resp){
+			searchCondition, "people", function(resp){
 			for (var i = 0; i < resp.outputData.length; i++){
 				var person_LatLng = new google.maps.LatLng(resp.outputData[i].lat_coords, resp.outputData[i].lng_coords);
 				var dist = getDistanceBetween(my_LatLng, person_LatLng);
