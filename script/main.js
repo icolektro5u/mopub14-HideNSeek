@@ -1,27 +1,29 @@
 window.peopleList=[];
 window.personNum=0;
 
-// Ny kod
-
-
+// Supposed to remove an object when the "owner" of the object is found
 function removePerson(){
 	alert("removePerson-funktion");
 };
 
+// Creates a room so that a game can be played
 function createGame(){
 	var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
 	helper.setPassword(hex_md5("lo8604924%."));
-
+	
 	var gameNameValue = $('#gameName').val();
 	var hostAliasValue = $('#hostAlias').val();
 	
 	
 	var searchCondition4 = { "game_name" : gameNameValue };
-		helper.searchDocuments(
+	// Checks if there are already games with the same name
+	helper.searchDocuments(
 		searchCondition4, "people", function(resp){
+			// If there is such a game alert user of it
 			if(resp.outputData[0]){
 				alert(gameNameValue + " already exists");
 			}
+			// If such a game does not exist, create it
 			else{
 				if ( helper ) {
 					var dataObject = {
@@ -31,8 +33,10 @@ function createGame(){
 
 					helper.insertDocument("people", dataObject, null);
 				}
+				// Writes game info on next page for storage
 				document.getElementById('gameText').innerHTML=gameNameValue;
 				document.getElementById('hostText').innerHTML=hostAliasValue;
+				// Goes to next page
 				location.href = '#waitingPage';
 			}
 		}
@@ -42,7 +46,7 @@ function createGame(){
 
 };
 
-
+// Starts process of joining a game
 function joinGame(){
 	var helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
 	helper.setPassword(hex_md5("lo8604924%."));
@@ -51,16 +55,20 @@ function joinGame(){
 	var aliasValue = $('#joinAlias').val();
 	
 	var searchCondition2 = { "game_name" : gameNameValue };
+	// Check if there is a game (with the given name) to join
 	helper.searchDocuments(
 		searchCondition2, "people", function(resp){
+			// If there is a game
 			if(resp.outputData[0]){
-				
 				var searchCondition5 = { $or : [ { "alias" : aliasValue } , { "host_alias" : aliasValue } ] };
+				// Checks if there is another player with same alias in the same game (though player objects are created after hiding)
 				helper.searchDocuments(
 					{ $and: [ searchCondition2, searchCondition5 ] }, "people", function(resp){
+						// If there is a player with same name alert user
 						if(resp.outputData[0]){
 							alert(aliasValue + " already exists");
 						}
+						// If there is no such player store the game name and alias on next page and go to it
 						else{
 							document.getElementById('joinGameText').innerHTML=gameNameValue;
 							document.getElementById('joinAliasText').innerHTML=aliasValue;
@@ -70,6 +78,7 @@ function joinGame(){
 				);
 				
 			}
+			// If such a game does not exist alert user
 			else{
 				alert(gameNameValue + " doesn't exists");
 			}
@@ -78,7 +87,7 @@ function joinGame(){
 	
 };
 	
-
+// Updates list of players (funkar inte)
 function updatePlayerList(){
 	var test = document.getElementById('gameText').innerHTML;
 	alert(test);
@@ -112,8 +121,6 @@ function initialize() {
 }
 
 
-
-
 function addPerson(){
 
   if (navigator.geolocation){
@@ -141,7 +148,6 @@ function addPerson(){
 		};
 		
 		search(dataObject);
-		
 		
 		function search(dataObject){
 
@@ -220,9 +226,6 @@ function getDistance(){
   	}
 
   	function showPosition(position){
-
-
-	
 	
 		var my_lat=position.coords.latitude;
 		var my_lng=position.coords.longitude;
