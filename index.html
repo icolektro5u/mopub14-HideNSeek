@@ -34,7 +34,6 @@
   		<!-- Load the Map -->
     <script src="script/main.js" type="text/javascript"></script>
 
-
   
 	<div data-role="page" id="home">
 	
@@ -48,6 +47,7 @@
 		  	<div class="col-md-4">
 				<!-- Button for game creation -->
 				<a href="#gameCreation"><button type="submit"> Create Game </button></a>
+				<!-- Button to join game -->
 				<a href="#joinGame"><button type="submit"> Join Game </button></a>
 		    	<!-- <a href="#page-x" onclick="getDistance()"><button type="submit"> Bench Press! </button></a>
 		    	<button type="submit" onclick="addPerson()"> Add bench!</button> -->
@@ -82,7 +82,7 @@
   	
   	</div><!-- Page gameCreation -->
 	
-	<!-- Page for starting game -->
+	<!-- Page for playing game -->
 	<div data-role="page" id="slask">
 		<script> 
 			$.mobile.defaultPageTransition = "none";
@@ -96,12 +96,15 @@
 		</div><!-- header -->
 	  	
 		<div data-role="content">
+			<!-- Name of game is written here -->
 			<h2 id="joinGameTitle"><strong>Game:</strong> </h2>
 			<div id="joinGameText"></div>
+			<!-- Name of player is written here -->
 			<h2 id="joinAliasTitle"><strong>Alias:</strong> </h2>
 			<div id="joinAliasText"></div>
-			<!-- Button for starting countdown -->
+			<!-- Button for storing GPS location-->
 			<button type="submit" onclick="addPerson()"> Hide </button>
+			<!-- Button for removing GPS location (not working yet) -->
 			<button type="submit" onclick="removePerson()"> Found </button>
 		</div>
   	
@@ -126,8 +129,7 @@
 			<!-- Name of gamer -->
 			<label for="basic">Your Alias:</label>
 			<input type="text" name="name" id="joinAlias" value=""/>
-			<!-- Button for creating game -->
-			<!-- <a href="#slask" onclick="joinGame()"><button type="submit" id="gameCreateButton"> Join </button></a> -->
+			<!-- Button for joining game -->
 			<button type="submit" onclick="joinGame()" id="gameCreateButton"> Join </button>
 		</div>
   	
@@ -136,7 +138,7 @@
 	
 	
 	
-	<!-- Page for waiting on other players -->
+	<!-- Page for host waiting for other players -->
 	<div data-role="page" id="waitingPage">
 		<script> 
 			$.mobile.defaultPageTransition = "none";
@@ -149,17 +151,19 @@
 		</div><!-- header -->
 	  	
 		<div data-role="content">
+			<!-- Name of game -->
 			<h2 id="gameTitle"><strong>Game:</strong> </h2>
 			<div id="gameText"></div>
+			<!-- Name of host -->
 			<h2 id="hostTitle"><strong>Host:</strong> </h2>
 			<div id="hostText"></div>
 			<!-- <div id="playerList"/> -->
+			<!-- Button to start seeking for other players -->
 			<a href="#page-x" onclick="getDistance()"><button type="submit"> Seek </button></a>
 			
 		</div>
   	
   	</div> <!-- Page waitingPage -->
-	
 	
 	
 		<!-- MALL FÖR KOMPASS -->
@@ -177,7 +181,7 @@
 		</script>
   		
 	  	<div data-role="header">		
-	  		<h1>Bench Press</h1>
+	  		<h1>Hide N Seek!</h1>
 			<a href="#home" data-icon="home" data-theme="a" class="ui-btn-right">Home</a>
 		</div><!-- header -->
 	  	
