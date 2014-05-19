@@ -25,6 +25,42 @@
     	<!-- jQueryMobile-->
     <link rel="stylesheet" href="script/jqMobile/jquery.mobile-1.4.2.min.css">
     <script src="script/jqMobile/jquery.mobile-1.4.2.min.js"></script>
+<<<<<<< HEAD
+=======
+    
+	<!-- <script>
+	
+	document.addEventListener(
+		"DOMContentLoaded",
+		function() {
+			$( "#gameCreateButton" ).bind( "click", function(event, ui) {
+				
+				
+				helper = new CBHelper("lab5_mopub14", "243cf93c71c270f90d7290e338d1e72e", new GenericHelper());
+				helper.setPassword(hex_md5("lo8604924%."));
+
+				var gameNameValue = $('#gameName').val();
+				var hostAliasValue = $('#hostAlias').val();
+				
+				if ( helper ) {
+					var dataObject = {
+						"gameName" : gameNameValue,
+						"hostAlias" : hostAliasValue
+					};
+
+					helper.insertDocument("games", dataObject, null);
+
+				}
+				
+				alert("Game created");
+			});
+			
+		},
+		true
+			
+	);
+	</script> -->
+>>>>>>> 28af0428f861f96ffb7d930fb17df18f7611eb00
 
 
   </head>
@@ -74,10 +110,17 @@
 			<label for="basic">Game Name:</label>
 			<input type="text" name="name" id="gameName" value=""/>
 			<!-- Name of host -->
+<<<<<<< HEAD
 			<label for="basic">Your Alias:</label>
 			<input type="text" name="name" id="hostAlias" value=""/>
 			<!-- Button for creating game -->
 			<button onclick="createGame()" type="submit" id="gameCreateButton"> Create </button>
+=======
+			<!-- <label for="basic">Your Alias:</label>
+			<input type="text" name="name" id="hostAlias" value=""/> -->
+			<!-- Button for creating game -->
+			<a href="#waitingPage" onclick="createGame()"><button type="submit" id="gameCreateButton"> Create </button></a>
+>>>>>>> 28af0428f861f96ffb7d930fb17df18f7611eb00
 		</div>
   	
   	</div><!-- Page gameCreation -->
@@ -102,7 +145,11 @@
 			<div id="joinAliasText"></div>
 			<!-- Button for starting countdown -->
 			<button type="submit" onclick="addPerson()"> Hide </button>
+<<<<<<< HEAD
 			<button type="submit" onclick="removePerson()"> Found </button>
+=======
+			<button type="submit" onclick=""> Found </button>
+>>>>>>> 28af0428f861f96ffb7d930fb17df18f7611eb00
 		</div>
   	
   	</div><!-- Page slask -->
@@ -127,8 +174,12 @@
 			<label for="basic">Your Alias:</label>
 			<input type="text" name="name" id="joinAlias" value=""/>
 			<!-- Button for creating game -->
+<<<<<<< HEAD
 			<!-- <a href="#slask" onclick="joinGame()"><button type="submit" id="gameCreateButton"> Join </button></a> -->
 			<button type="submit" onclick="joinGame()" id="gameCreateButton"> Join </button>
+=======
+			<a href="#slask" onclick="joinGame()"><button type="submit" id="gameCreateButton"> Join </button></a>
+>>>>>>> 28af0428f861f96ffb7d930fb17df18f7611eb00
 		</div>
   	
   	</div> <!-- Page joinGamePage -->
@@ -151,9 +202,15 @@
 		<div data-role="content">
 			<h2 id="gameTitle"><strong>Game:</strong> </h2>
 			<div id="gameText"></div>
+<<<<<<< HEAD
 			<h2 id="hostTitle"><strong>Host:</strong> </h2>
 			<div id="hostText"></div>
 			<!-- <div id="playerList"/> -->
+=======
+			<!-- <div id="hostTitle"><strong>Host:</strong> </div> -->
+			<!-- <div id="hostText"></div> -->
+			<div id="playerList"/>
+>>>>>>> 28af0428f861f96ffb7d930fb17df18f7611eb00
 			<a href="#page-x" onclick="getDistance()"><button type="submit"> Seek </button></a>
 			
 		</div>

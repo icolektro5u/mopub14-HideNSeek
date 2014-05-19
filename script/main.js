@@ -162,6 +162,7 @@ function addPerson(){
 				  return d; // returns the distance in meter
 				};
 				
+				
 				var searchCondition3 = { "lat_coords" : { $exists : true } };
 				helper.searchDocuments(
 					searchCondition3, "people", function(resp){
