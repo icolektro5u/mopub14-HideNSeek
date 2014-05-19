@@ -163,7 +163,7 @@ function addPerson(){
 				};
 				
 				
-				var searchCondition3 = { "lat_coords" : { $exists : true } };
+				var searchCondition3 = { $and: [ { "game_name": gameNameValue }, { "lat_coords" : { $exists : true } } ] };
 				helper.searchDocuments(
 					searchCondition3, "people", function(resp){
 						var k=0; // En variabel som ökar vid varje "distanserad bänk"
